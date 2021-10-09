@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  jupyterhub:
+    image: jupyterhub/jupyterhub:custom
+    build: .
+
+    networks:
+      - jupyterhub
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data/logs:/var/log
+      - ./data/jupyterhub:/srv/jupyterhub
+      - /var/run/docker.sock:/var/run/docker.sock # for dockerspawner
+
+    command: jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
+    environment:
+      - DOCKER_NOTEBOOK_IMAGE=jupyter/base-notebook:custom
+
+  jupyterhub-notebook:
+    image: jupyter/base-notebook:custom
+    build:
+      dockerfile: custom-base-notebook.Dockerfile
+      context: .
+    command: sh -c 'echo "exiting - shouldnt be run from docker-compose."'
+
+networks:
+  jupyterhub:
+    name: jupyterhub
