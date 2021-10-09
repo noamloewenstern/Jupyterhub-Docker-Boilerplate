@@ -33,5 +33,7 @@
 - All configuration for the jupyterhub is in the `./data/jupyterhub/jupyterhub_config.py` file.
 - The DB is using the default sqlite (saved in `./data/jupyterhub/jupyterhub_config.sqlite`), and using the 'nativeauthenticator' (saved in sqlite file.)
 - DO NOT change the network name 'jupyterhub', since it is used by the docker-spawner. The name can be changed, but must be updated in the config-file too.
+- Extensions:
+  The file 'extensions.txt' is a file where you can add list of the jupyterhub extensions names (npm package name), to install at build time, instead of after running the server. Totally optional.
 
 # Enjoy!
