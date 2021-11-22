@@ -1,14 +1,17 @@
 import os
 import pwd
 import subprocess
-
+import nativeauthenticator
 
 '''
 Authenticator Config - Very Basic (saving in sqlite db)
 '''
 c.JupyterHub.authenticator_class = 'nativeauthenticator.NativeAuthenticator'
+c.JupyterHub.template_paths = [f"{os.path.dirname(nativeauthenticator.__file__)}/templates/"]
 
-c.Authenticator.admin_users = {'admin'}
+c.Authenticator.admin_users = {
+    os.getenv('ADMIN_USERNAME', 'admin'),
+}
 
 
 def pre_spawn_hook(spawner):
