@@ -16,11 +16,12 @@ services:
     command: jupyterhub -f /srv/jupyterhub/jupyterhub_config.py
     environment:
       - DOCKER_NOTEBOOK_IMAGE=jupyter/base-notebook:custom
+      - ADMIN_USERNAME=admin
 
   jupyterhub-notebook:
     image: jupyter/base-notebook:custom
     build:
-      dockerfile: custom-base-notebook.Dockerfile
+      dockerfile: base-notebook.Dockerfile
       context: .
     command: sh -c 'echo "exiting - shouldnt be run from docker-compose."'
 

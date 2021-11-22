@@ -10,8 +10,6 @@ RUN useradd --create-home admin && \
     usermod -aG root admin && \
     chown -hR admin /usr/local/share/jupyter/lab
 
-RUN apt update && apt install nano -y
-
 # OPTIONAL for installing extensions before running.
 # COPY extensions.txt .
 # RUN cat extensions.txt | xargs -I {} jupyter labextension install {}
